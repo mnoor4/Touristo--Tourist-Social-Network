@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "EventsPage";
+}
+<head>
+    <style>
+        p{ color:black}
+    </style>
+</head>
+    <h1 style="font-family:'Monetz',cursive; text-align:center;color:rgba(252, 61, 106, 0.75)">Events Happening</h1>
+    @*<div style="font-family:'Monetz',cursive; text-align:center;color:rgba(252, 61, 106, 0.75)">
+            <h2>Events Happening</h2>
+        </div>*@
+    <div class="jumbotron" style="height:inherit;margin-left:5%;margin-right:5%;background-color:lavender">
+        <div style="height:inherit">
+            <h3>Event 1</h3>
+            <p>This event is happening in Kaghan on 1st Nov at 08:00</p>
+            <p><button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="location.href='@Url.Action("EventsPage2", "Home")'">Review</button>  &nbsp&nbsp&nbsp        <button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit">Going</button></p>
+        </div>
+    </div>
+    <div class="jumbotron" style="height:inherit;margin-left:5%;margin-right:5%;background-color:lavender">
+        <div style="height:inherit">
+            <h3>Event 2</h3>
+            <p>This event is happening in Naghan on 3rd Nov at 12:00</p>
+            <p><button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="location.href='@Url.Action("EventsPage2", "Home")'">Review</button>  &nbsp&nbsp&nbsp        <button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit">Going</button></p>
+        </div>
+    </div>
+    <div class="jumbotron" style="height:inherit;margin-left:5%;margin-right:5%;background-color:lavender">
+        <div style="height:inherit">
+            <h3>Event 2</h3>
+            <p>This event is happening in Skardu on 3rd Nov at 12:00</p>
+            <p><button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="location.href='@Url.Action("EventsPage2", "Home")'">Review</button>  &nbsp&nbsp&nbsp        <button style="text-align:right" class="btn btn-secondary my-2 my-sm-0" type="submit">Going</button></p>
+        </div>
+    </div>
+
+
