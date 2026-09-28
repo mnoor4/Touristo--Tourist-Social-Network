@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TouristOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="EventDetails" Type="text" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\VISUAL STUDIO 2017\PROJECTS\WEBAPPLICATION26\WEBAPPLICATION26\APP_DATA\TOURISTO.MDF.dbo.Friends' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="FriendId" />
+            <PropertyRef Name="FriendStatus" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="FriendId" Type="int" Nullable="false" />
+          <Property Name="FriendStatus" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberUsername" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MemberPassword" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MemberName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MemberAddress" Type="nchar" MaxLength="20" />
+          <Property Name="MemberContactNumber" Type="int" Nullable="false" />
+          <Property Name="MemberDateofBirth" Type="nchar" MaxLength="20" />
+          <Property Name="MemberGender" Type="char" MaxLength="10" />
+          <Property Name="MemberPostId" Type="int" Nullable="false" />
+          <Property Name="MemberBio" Type="text" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessengerId" Type="int" Nullable="false" />
+          <Property Name="MessageDateTime" Type="datetime" Nullable="false" />
+          <Property Name="MessageText" Type="text" Nullable="false" />
+          <Property Name="MessageStatus" Type="bit" Nullable="false" />
+          <Property Name="UnknownStatus" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\VISUAL STUDIO 2017\PROJECTS\WEBAPPLICATION26\WEBAPPLICATION26\APP_DATA\TOURISTO.MDF.dbo.MyEvents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MyEvents">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="MyEventsIntrests" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="MyEventsIntrests" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EventId">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="MyEvents" Type="Self.MyEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="MyEvents">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MyEvents" Type="Self.MyEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MyEvents">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MessageMember">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FriendFK">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TouristOModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friends" EntityType="Self.Friends" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Friends].[MemberId] AS [MemberId], 
+    [Friends].[FriendId] AS [FriendId], 
+    [Friends].[FriendStatus] AS [FriendStatus]
+    FROM [dbo].[Friends] AS [Friends]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MyEvents" EntityType="Self.MyEvents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MyEvents].[EventId] AS [EventId], 
+    [MyEvents].[MemberId] AS [MemberId], 
+    [MyEvents].[MyEventsIntrests] AS [MyEventsIntrests]
+    FROM [dbo].[MyEvents] AS [MyEvents]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_EventId" Association="Self.FK_EventId">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="MyEvents" EntitySet="MyEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberId" Association="Self.FK_MemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MyEvents" EntitySet="MyEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MessageMember" Association="Self.FK_MessageMember">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FriendFK" Association="Self.FriendFK">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TouristOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EventDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MyEvents" Relationship="Self.FK_EventId" FromRole="Events" ToRole="MyEvents" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberUsername" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MemberPassword" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MemberName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MemberAddress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MemberContactNumber" Type="Int32" Nullable="false" />
+          <Property Name="MemberDateofBirth" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MemberGender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MemberPostId" Type="Int32" Nullable="false" />
+          <Property Name="MemberBio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MyEvents" Relationship="Self.FK_MemberId" FromRole="Members" ToRole="MyEvents" />
+          <NavigationProperty Name="Message" Relationship="Self.FK_MessageMember" FromRole="Members" ToRole="Messages" />
+          <NavigationProperty Name="Friends" Relationship="Self.FriendFK" FromRole="Members" ToRole="Friends" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessengerId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MessageStatus" Type="Boolean" Nullable="false" />
+          <Property Name="UnknownStatus" Type="Boolean" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_MessageMember" FromRole="Messages" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="FriendId" />
+            <PropertyRef Name="FriendStatus" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="FriendId" Type="Int32" Nullable="false" />
+          <Property Name="FriendStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FriendFK" FromRole="Friends" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="MyEvent">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="MyEventsIntrests" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="MyEventsIntrests" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_EventId" FromRole="MyEvents" ToRole="Events" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_MemberId" FromRole="MyEvents" ToRole="Members" />
+        </EntityType>
+        <Association Name="FK_EventId">
+          <End Role="Events" Type="Self.Event" Multiplicity="1" />
+          <End Role="MyEvents" Type="Self.MyEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="MyEvents">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberId">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="MyEvents" Type="Self.MyEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MyEvents">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MessageMember">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FriendFK">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="Friends" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TouristOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Friends" EntityType="Self.Friend" />
+          <EntitySet Name="MyEvents" EntityType="Self.MyEvent" />
+          <AssociationSet Name="FK_EventId" Association="Self.FK_EventId">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="MyEvents" EntitySet="MyEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberId" Association="Self.FK_MemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MyEvents" EntitySet="MyEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MessageMember" Association="Self.FK_MessageMember">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FriendFK" Association="Self.FriendFK">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TouristOModelStoreContainer" CdmEntityContainer="TouristOEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TouristOModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDetails" ColumnName="EventDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="TouristOModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberUsername" ColumnName="MemberUsername" />
+                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="MemberAddress" ColumnName="MemberAddress" />
+                <ScalarProperty Name="MemberContactNumber" ColumnName="MemberContactNumber" />
+                <ScalarProperty Name="MemberDateofBirth" ColumnName="MemberDateofBirth" />
+                <ScalarProperty Name="MemberGender" ColumnName="MemberGender" />
+                <ScalarProperty Name="MemberPostId" ColumnName="MemberPostId" />
+                <ScalarProperty Name="MemberBio" ColumnName="MemberBio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="TouristOModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MessengerId" ColumnName="MessengerId" />
+                <ScalarProperty Name="MessageDateTime" ColumnName="MessageDateTime" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="MessageStatus" ColumnName="MessageStatus" />
+                <ScalarProperty Name="UnknownStatus" ColumnName="UnknownStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="TouristOModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="FriendStatus" ColumnName="FriendStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyEvents">
+            <EntityTypeMapping TypeName="TouristOModel.MyEvent">
+              <MappingFragment StoreEntitySet="MyEvents">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MyEventsIntrests" ColumnName="MyEventsIntrests" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
