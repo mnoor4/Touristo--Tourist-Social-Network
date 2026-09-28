@@ -1,0 +1,99 @@
+﻿@model WebApplication26.Models.Member
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberDateofBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberDateofBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberPostId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberPostId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberBio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberBio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message.MessageText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message.MessageText)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MemberId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
