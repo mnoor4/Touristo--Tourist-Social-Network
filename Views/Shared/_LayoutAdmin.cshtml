@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<html>
+<head>
+    <title>Tourist'O Admin</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="Beauty Spa Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <!-- Bootstrap-Core-CSS -->
+    <link href="~/Context/css/bootstrap1.css" rel="stylesheet" />
+    <!-- pop up box -->
+    <link href="~/Context/css/popuo-box1.css" rel="stylesheet" />
+    <!-- gallery light box -->
+    <link href="~/Context/css/lsb1.css" rel="stylesheet" />
+    <!-- Style-CSS -->
+    <link href="~/Context/css/style1.css" rel="stylesheet" />
+    <!-- Font-Awesome-Icons-CSS -->
+    <link href="~/Context/css/fontawesome-all1.css" rel="stylesheet" />
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Paytone+One&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Montez" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <!-- //Web-Fonts -->
+
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top" style="background-image: url('../../Context/images/cover4.jpg');">
+    <div id="home">
+        <!-- header -->
+        <header>
+            <!-- navbar -->
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand text-white font-weight-bold" href="@Url.Action("HomePage","Home")">
+                    Tourist<span>'</span>O Administrator
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto text-center mr-xl-5 mt-lg-0 mt-3">
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","Members")>Members</a>
+                        </li>
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","Events")>Events</a>
+                        </li>
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","MyEvents")>User Events</a>
+                        </li>
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","Messages")>Messages</a>
+                        </li>
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","Friends")>Friends</a>
+                        </li>
+                        <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                            <a class="nav-link scroll" href=@Url.Action("Index","Home")><i class="fa fa-backward"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- //navbar ends here -->
+        </header>
+        <!-- //header -->
+
+
+        <div class="container" style="padding-top:7%; align-self:center; background:transparent">
+            @* Spacing top *@
+        </div>
+
+        <div class="jumbotron" style=" align-self:center; background:white;padding-top:2%; padding-bottom:2%; margin-left:10%; margin-right:10%; border:groove">
+            @RenderBody()
+        </div>
+
+
+        <!-- footer -->
+        <footer class="text-center py-sm-5 py-4" style="background-color:transparent">
+            <div class="container" style="background-color:transparent">
+                <div class="footer-posi-agileinfo" style="background-color:transparent">
+                    <h2 class="logo-2 font-weight-bold" style="background-color:transparent">
+                        <a href="@Url.Action("HomePage","Home")" class="text-dark">
+                            Tourist<span>'</span>O Administrator
+                        </a>
+                    </h2>
+                    <!-- copyright -->
+                    <p class="copy-right-grids">
+                        © 2018 Tourist'O. All Rights Reserved
+                    </p>
+                    <!-- //copyright -->
+                </div>
+            </div>
+        </footer>
+        <!-- //footer -->
+        <!-- Js files -->
+        <!-- JavaScript -->
+        <script src="~/Context/js/jquery-2.2.3.min.js"></script>
+        <!-- Default-JavaScript-File -->
+        <!-- Necessary-JavaScript-File-For-Bootstrap -->
+        <script src="~/Context/js/bootstrap.js"></script>
+        <!-- Text effect -->
+        <script src="~/Context/js/text_effect.js"></script>
+
+        <!-- pop-up-box -->
+        <script src="~/Context/js/jquery.magnific-popup.js"></script>
+        <!-- particles (bg effect) -->
+        <script src="~/Context/js/jquery.canvas.particles.min.js"></script>
+        <!-- gallery light box -->
+        <script src="~/Context/js/lsb.min.js"></script>
+        <!-- smooth scrolling -->
+        <script src="~/Context/js/SmoothScroll.min.js"></script>
+        <!-- move-top -->
+        <script src="~/Context/js/move-top.js"></script>
+        <!-- easing -->
+        <script src="~/Context/js/easing.js"></script>
+        <!--  necessary snippets for few javascript files -->
+        <script src="~/Context/js/beauty_spa.js"></script>
+        <!-- //Js files -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="@Url.Content("~/js/bootstrap.js")"></script>
+    </div>
+</body>
+
+</html>
